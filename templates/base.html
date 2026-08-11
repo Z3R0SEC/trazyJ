@@ -18,7 +18,7 @@
 <meta property="og:title" content="{{ page_title | default(cfg.SITE_NAME ~ ' — Official Artist Profile') }}">
 <meta property="og:description" content="{{ cfg.META_DESCRIPTION }}">
 <meta property="og:url" content="{{ canonical_url | default(cfg.SITE_URL ~ '/') }}">
-<meta property="og:image" content="{{ cfg.SITE_URL }}{{ url_for('static', filename='images/trazy-jay-portrait.jpg') }}">
+<meta property="og:image" content="https://trazyjay.motadev.xyz{{ url_for('static', filename='images/trazy-jay-portrait.jpg') }}">
 <meta property="og:image:width" content="281">
 <meta property="og:image:height" content="364">
 <meta property="og:locale" content="en_ZA">
@@ -27,7 +27,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ page_title | default(cfg.SITE_NAME ~ ' — Official Artist Profile') }}">
 <meta name="twitter:description" content="{{ cfg.META_DESCRIPTION }}">
-<meta name="twitter:image" content="{{ cfg.SITE_URL }}{{ url_for('static', filename='images/trazy-jay-portrait.jpg') }}">
+<meta name="twitter:image" content="https://trazyjay.motadev.xyz{{ url_for('static', filename='images/trazy-jay-portrait.jpg') }}">
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
@@ -40,8 +40,8 @@
   "name": "{{ cfg.ARTIST_STAGE_NAME }}",
   "alternateName": "{{ cfg.ARTIST_LEGAL_NAME }}",
   "genre": ["Afro-Pop", "Hip Hop"],
-  "url": "{{ cfg.SITE_URL }}/",
-  "image": "{{ cfg.SITE_URL }}{{ url_for('static', filename='images/trazy-jay-portrait.jpg') }}",
+  "url": "https://trazyjay.motadev.xyz",
+  "image": "https://trazyjay.motadev.xyz{{ url_for('static', filename='images/trazy-jay-portrait.jpg') }}",
   "sameAs": ["{{ cfg.FACEBOOK_URL }}"],
   "genreCode": "Afro-Pop, Hip Hop",
   "foundingLocation": {
