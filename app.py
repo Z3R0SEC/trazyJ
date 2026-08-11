@@ -108,7 +108,7 @@ def contact():
     )
     return redirect(url_for("index") + "#bookings")
 
-@app.route("/sitemap.xml")
+@app.route("/sanele.xml")
 def sitemap():
     pages = [
         {"loc": f"{request.host_url}", "priority": "1.0", "changefreq": "weekly"},
