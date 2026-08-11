@@ -1,6 +1,7 @@
 import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from flask import (
     Flask,
@@ -15,12 +16,19 @@ from flask import (
 
 import config
 
+
 BASE_DIR = Path(__file__).resolve().parent
 DB_PATH = BASE_DIR / "myBookings.db"
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "forMyBrotherSessionHandl3r@3211123"
 
+app.wsgi_app = ProxyFix(
+    app.wsgi_app,
+    x_for=1,
+    x_proto=1,
+    x_host=1
+)
 
 def get_db():
     if "db" not in g:
@@ -112,7 +120,7 @@ def contact():
 def sitemap():
     pages = [
         {"loc": f"{request.host_url}", "priority": "1.0", "changefreq": "weekly"},
-        {"loc": f"{request.host_url}contact", "priority": "1.0", "changefreq": "weekly"}
+        {"loc": f"{request.host_url}#contact", "priority": "1.0", "changefreq": "weekly"}
     ]
     xml = render_template("sitemap.xml", pages=pages)
     return Response(xml, mimetype="application/xml")
