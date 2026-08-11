@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <p class="eyebrow">{{ cfg.LABEL_NAME }} &middot; Official Artist Profile</p>
+      <h1 class="hero__title">Trazy Jay<br><span>Rsa</span></h1>
+      <p class="hero__tagline">{{ cfg.TAGLINE }}</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="{{ cfg.WHATSAPP_PREFILL }}" target="_blank" rel="noopener">
+          Enquire on WhatsApp
+        </a>
+        <a class="btn btn--ghost" href="{{ cfg.FACEBOOK_URL }}" target="_blank" rel="noopener">
+          Follow on Facebook
+        </a>
+      </div>
+      <ul class="hero__tags">
+        <li>Afro&#8209;Pop</li>
+        <li>Hip Hop</li>
+        <li>Ntumbane &middot; Pongola &middot; KZN</li>
+      </ul>
+    </div>
+
+    <div class="hero__portrait">
+      <div class="vinyl" aria-hidden="true">
+        <div class="vinyl__disc"></div>
+      </div>
+      <img
+        src="{{ url_for('static', filename='images/trazy-jay-portrait.jpg') }}"
+        alt="Trazy Jay Rsa, Afro-Pop and Hip Hop recording artist from Pongola, KwaZulu-Natal"
+        class="hero__photo"
+        width="281" height="364"
+      >
+    </div>
+  </div>
+</section>
+
+<section id="biography" class="section section--paper">
+  <div class="wrap section__grid">
+    <div class="section__head">
+      <p class="eyebrow eyebrow--dark">Artist Biography</p>
+      <h2>The story so far</h2>
+    </div>
+
+    <div class="prose">
+      <p>
+        Trazy Jay Rsa is an Afro-Pop and Hip Hop recording artist and songwriter
+        from Ntumbane, Pongola, in KwaZulu-Natal. Born on 3 March 2002 at
+        Etsheni Lejuba Hospital, he grew up surrounded by the sounds and
+        storytelling traditions of KZN &mdash; an influence that still runs
+        through everything he records.
+      </p>
+      <p>
+        Signed to Last Gido Entertainment, he writes music built on memorable
+        melodies, modern African rhythms and lyrics that don't dress up the
+        truth. He moves easily between Afro-Pop and Hip Hop without losing the
+        thread of his own sound &mdash; a voice shaped by where he's from and
+        where he's headed.
+      </p>
+      <p>
+        As both recording artist and songwriter, Trazy Jay treats every track
+        as its own piece of writing. Ambition, relationships, real life, the
+        climb of a young artist building a name &mdash; the subject changes,
+        the honesty doesn't.
+      </p>
+      <p>
+        He's part of a new wave of KZN talent with the energy and the
+        songwriting to travel &mdash; from Pongola to stages across South
+        Africa and beyond.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="sound" class="section section--ink">
+  <div class="wrap">
+    <div class="section__head section__head--center">
+      <p class="eyebrow">Artist Information</p>
+      <h2>The spec sheet</h2>
+    </div>
+
+    <dl class="spec-sheet">
+      {% for label, value in cfg.ARTIST_INFO.items() %}
+      <div class="spec-sheet__row">
+        <dt>{{ label }}</dt>
+        <dd>{{ value | safe }}</dd>
+      </div>
+      {% endfor %}
+    </dl>
+  </div>
+</section>
+
+<section id="bookings" class="section section--paper">
+  <div class="wrap section__grid section__grid--bookings">
+    <div class="section__head">
+      <p class="eyebrow eyebrow--dark">Bookings &amp; Live Performances</p>
+      <h2>Get Trazy Jay on your lineup</h2>
+      <p class="section__lede">
+        Festivals, concerts, private events and collaborations &mdash;
+        reach the team directly, or send a short brief below and they'll
+        follow up.
+      </p>
+
+      <div class="contact-card">
+        <a class="contact-card__row" href="{{ cfg.WHATSAPP_PREFILL }}" target="_blank" rel="noopener">
+          <span class="contact-card__label">WhatsApp</span>
+          <span class="contact-card__value">{{ cfg.PHONE_DISPLAY }}</span>
+        </a>
+        <a class="contact-card__row" href="mailto:{{ cfg.EMAIL }}">
+          <span class="contact-card__label">Email</span>
+          <span class="contact-card__value">{{ cfg.EMAIL }}</span>
+        </a>
+        <a class="contact-card__row" href="{{ cfg.FACEBOOK_URL }}" target="_blank" rel="noopener">
+          <span class="contact-card__label">Facebook</span>
+          <span class="contact-card__value">sanele.trazyjayrsa</span>
+        </a>
+      </div>
+    </div>
+
+    <form class="booking-form" method="post" action="{{ url_for('contact') }}">
+      <div class="field">
+        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="contact">Phone or email</label>
+        <input id="contact" name="contact" type="text" required autocomplete="tel">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="event_type">Event type</label>
+          <input id="event_type" name="event_type" type="text" placeholder="Festival, private event...">
+        </div>
+        <div class="field">
+          <label for="event_date">Event date</label>
+          <input id="event_date" name="event_date" type="date">
+        </div>
+      </div>
+      <div class="field">
+        <label for="message">Brief</label>
+        <textarea id="message" name="message" rows="4" placeholder="Venue, city, budget range, anything the team should know."></textarea>
+      </div>
+      <button class="btn btn--primary btn--block" type="submit">Send enquiry</button>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

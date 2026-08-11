@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Page not found — {{ cfg.SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="section section--ink error-page">
+  <div class="wrap">
+    <p class="eyebrow">404</p>
+    <h1 class="error-page__title">This track doesn't exist.</h1>
+    <p class="error-page__lede">The page you're looking for isn't here.</p>
+    <a class="btn btn--primary" href="{{ url_for('index') }}">Back to the homepage</a>
+  </div>
+</section>
+{% endblock %}

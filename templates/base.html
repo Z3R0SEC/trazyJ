@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>{% block title %}{{ page_title | default(cfg.SITE_NAME ~ ' — Official Artist Profile') }}{% endblock %}</title>
+<meta name="description" content="{% block description %}{{ cfg.META_DESCRIPTION }}{% endblock %}">
+<meta name="keywords" content="{{ cfg.KEYWORDS }}">
+<meta name="author" content="{{ cfg.ARTIST_STAGE_NAME }}">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#14110D">
+<link rel="canonical" href="{% block canonical %}{{ canonical_url | default(cfg.SITE_URL ~ '/') }}{% endblock %}">
+
+<!-- Open Graph -->
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="{{ cfg.SITE_NAME }}">
+<meta property="og:title" content="{{ page_title | default(cfg.SITE_NAME ~ ' — Official Artist Profile') }}">
+<meta property="og:description" content="{{ cfg.META_DESCRIPTION }}">
+<meta property="og:url" content="{{ canonical_url | default(cfg.SITE_URL ~ '/') }}">
+<meta property="og:image" content="{{ cfg.SITE_URL }}{{ url_for('static', filename='images/trazy-jay-portrait.jpg') }}">
+<meta property="og:image:width" content="281">
+<meta property="og:image:height" content="364">
+<meta property="og:locale" content="en_ZA">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page_title | default(cfg.SITE_NAME ~ ' — Official Artist Profile') }}">
+<meta name="twitter:description" content="{{ cfg.META_DESCRIPTION }}">
+<meta name="twitter:image" content="{{ cfg.SITE_URL }}{{ url_for('static', filename='images/trazy-jay-portrait.jpg') }}">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+
+<!-- JSON-LD structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "name": "{{ cfg.ARTIST_STAGE_NAME }}",
+  "alternateName": "{{ cfg.ARTIST_LEGAL_NAME }}",
+  "genre": ["Afro-Pop", "Hip Hop"],
+  "url": "{{ cfg.SITE_URL }}/",
+  "image": "{{ cfg.SITE_URL }}{{ url_for('static', filename='images/trazy-jay-portrait.jpg') }}",
+  "sameAs": ["{{ cfg.FACEBOOK_URL }}"],
+  "genreCode": "Afro-Pop, Hip Hop",
+  "foundingLocation": {
+    "@type": "Place",
+    "name": "Ntumbane, Pongola, KwaZulu-Natal, South Africa"
+  },
+  "member": {
+    "@type": "Person",
+    "name": "{{ cfg.ARTIST_LEGAL_NAME }}",
+    "birthDate": "2002-03-03",
+    "birthPlace": "Etsheni Lejuba Hospital, KwaZulu-Natal, South Africa"
+  },
+  "recordLabel": {
+    "@type": "Organization",
+    "name": "{{ cfg.LABEL_NAME }}",
+    "email": "{{ cfg.EMAIL }}"
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="{{ url_for('index') }}">
+      <span class="brand__disc" aria-hidden="true"></span>
+      <span class="brand__text">Trazy Jay <em>Rsa</em></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      {% for label, href in cfg.NAV_LINKS %}
+        <a href="{{ href }}">{{ label }}</a>
+      {% endfor %}
+      <a class="site-nav__cta" href="{{ cfg.WHATSAPP_PREFILL }}" target="_blank" rel="noopener">Book Now</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="wrap flash-stack">
+        {% for category, msg in messages %}
+          <p class="flash flash--{{ category }}">{{ msg }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <div class="site-footer__brand">
+      <span class="brand__disc brand__disc--small" aria-hidden="true"></span>
+      <div>
+        <p class="site-footer__name">Trazy Jay Rsa</p>
+        <p class="site-footer__label">{{ cfg.LABEL_NAME }}</p>
+      </div>
+    </div>
+
+    <div class="site-footer__links">
+      <a href="{{ cfg.FACEBOOK_URL }}" target="_blank" rel="noopener">Facebook</a>
+      <a href="{{ cfg.WHATSAPP_URL }}" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:{{ cfg.EMAIL }}">{{ cfg.EMAIL }}</a>
+    </div>
+
+    <p class="site-footer__meta">
+      &copy; {{ current_year }} {{ cfg.ARTIST_STAGE_NAME }}. Representing Ntumbane &middot; Pongola &middot; KZN.
+      <br>Developed with love by <a href="https://motadev.xyz" style="color: red;">MotaDev</a>.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
